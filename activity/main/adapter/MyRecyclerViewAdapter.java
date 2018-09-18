@@ -96,8 +96,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     //after changetimeialog
     @Override
     public void onTimeSet(TimePicker timePicker, int i, int i1) {
-        CardContent card=new CardContent(getTime(timePicker),list.get(selectedCardId).getText());
-        changeItem(card,selectedCardId);
+        changeItem(timePicker,selectedCardId);
     }
 
 
@@ -132,10 +131,16 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         }
     }
 
-    public void changeItem(CardContent card, int position){
-        if(checkIsTimeNotReserved(card.getTime())) {
+    private void changeItem(TimePicker picker, int position){
+        if(checkIsTimeNotReserved(getTime(picker))) {
+            deleteAlarm(position);
+
+            String content=list.get(position).getText();
+            CardContent card=new CardContent(getTime(picker),content);
+
             MySharedPreference.changeElementFromList(card, position, activity);
             list = MySharedPreference.getTodoList(activity);
+            setAlarm(picker,content,getCardId(getTime(picker)));
             notifyDataSetChanged();
         }
 
