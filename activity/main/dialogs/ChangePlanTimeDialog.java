@@ -2,7 +2,9 @@ package ru.scapegoats.dayplanner.activity.main.dialogs;
 
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.bluetooth.BluetoothClass;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 
 import java.util.Calendar;
 
@@ -21,7 +23,13 @@ public class ChangePlanTimeDialog extends DialogFragment {
 
 
         MainActivity activity=(MainActivity) getActivity();
-        return new TimePickerDialog(activity,  (TimePickerDialog.OnTimeSetListener) activity.getView().adapter, hour, minute, true);
+
+
+        return new TimePickerDialog(activity
+                ,  (TimePickerDialog.OnTimeSetListener) activity.getView().adapter
+                , hour
+                , minute
+                , DateFormat.is24HourFormat(getContext()));
 
 
     }

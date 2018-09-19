@@ -2,7 +2,9 @@ package ru.scapegoats.dayplanner.activity.main.dialogs;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.view.View;
+import android.view.Window;
 import android.widget.TimePicker;
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -25,8 +27,16 @@ public class CreateNewPlanDialog extends Dialog {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_dialog);
+
+        final TimePicker timePicker = findViewById(R.id.timePicker);
+
+        //if device use 24h format then we change our timepicker
+        if(DateFormat.is24HourFormat(context)){
+            timePicker.setIs24HourView(true);
+        }
 
         //handle click on DISMISS button
         findViewById(R.id.butDissmis).setOnClickListener(new View.OnClickListener() {
@@ -40,7 +50,6 @@ public class CreateNewPlanDialog extends Dialog {
         findViewById(R.id.butAdd).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TimePicker timePicker = findViewById(R.id.timePicker);
                 TextInputEditText editText = findViewById(R.id.textField);
                 TextInputLayout textInputLayout = findViewById(R.id.textFieldLayout);
 

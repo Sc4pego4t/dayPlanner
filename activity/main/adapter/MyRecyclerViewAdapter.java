@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -58,7 +59,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public CardView  foregroundCard;
+        public LinearLayout foregroundCard;
         RelativeLayout backgroundCard;
         TextView textView;
         Button button;
